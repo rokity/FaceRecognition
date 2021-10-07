@@ -18,7 +18,7 @@ faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # Initiate the Webcam device with default id of 0
 video_capture = cv2.VideoCapture(0)
 # Generate the 'file.csv' with labels time, FPS: Frame Per Second
-print('time,FPS',  file=open('file.csv', 'w'))
+# print('time,FPS',  file=open('file.csv', 'w'))
 # This function will run camera 
 def camRun():
 	# A counter to count the frames
@@ -60,8 +60,7 @@ def camRun():
 		cnt+=1
 		i+=1
 # Lets call the Plot.py in a function plot
-def plot():
-	os.system('python Plot.py')
+
 # Start the thread for the plot function
 # _thread.start_new_thread(plot,())
 # Now run the camRun() function to generate the file.csv 
