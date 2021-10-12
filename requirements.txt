@@ -2,3 +2,4 @@ opencv-python
 numpy
 imutils
 opencv-python-headless
+Flask
