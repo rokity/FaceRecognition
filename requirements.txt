@@ -2,4 +2,5 @@ opencv-python
 numpy
 imutils
 opencv-python-headless
-Flask
+flask
+Flask-Cors==1.10.3

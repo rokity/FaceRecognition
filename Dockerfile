@@ -1,6 +1,5 @@
-FROM python:3.8-slim-buster
-WORKDIR /app
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-COPY . .
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+FROM jjanzic/docker-python3-opencv
+ADD . /python-flask
+WORKDIR /python-flask
+RUN python3 -m pip install -r requirements.txt
+CMD [ "python3", "app.py" ]

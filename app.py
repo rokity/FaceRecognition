@@ -26,10 +26,11 @@ def video_feed():
         vidcap.release()
         cv2.destroyAllWindows()
         break
-  # faces_detected=camRun(frame,faceCascade)
   
   return jsonify({"phrase":faces})
 
+if __name__ == '__main__':
+	app.run(host="0.0.0.0", debug=True)
 
 ##### REAL TIME API ROUTE ##########
 # @app.route('/video_feed')
