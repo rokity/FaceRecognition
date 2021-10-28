@@ -66,13 +66,13 @@ def run(init_lr=0.1,
         batch_size=3 * 15,
         save_model='',
         weights=None,
-        process_unit = 'cpu'):
-        # split = 1000,
-        # num_classes=0):
+        process_unit = 'cpu',
+        split = 1000,
+        num_classes=0):
     # setup dataset
     test_transforms = transforms.Compose([videotransforms.CenterCrop(224)])
 
-    val_dataset = Dataset(train_split, 'test', root, mode, test_transforms)
+    val_dataset = Dataset(split, 'test', root, mode, test_transforms)
     val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=1,
                                                  shuffle=False, num_workers=2,
                                                  pin_memory=False)
@@ -150,6 +150,7 @@ def run(init_lr=0.1,
     # top10_per_class = np.mean(top10_tp / (top10_tp + top10_fp))
     # print('top-k average per class acc: {}, {}, {}'.format(top1_per_class, top5_per_class, top10_per_class))
     print('Result: {}'.format(translation))
+    return translation
 
 
 def ensemble(mode, root, train_split, weights, num_classes, process_unit='cpu'):
@@ -308,3 +309,4 @@ if __name__ == '__main__':
 
     # Added process_unit with the following values: 'cpu' and 'gpu'
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights, process_unit='cpu') # , split=split)
+   

@@ -8,6 +8,7 @@ __pycache__/
 
 #Mac File System file
 .DS_Store
+
 # Distribution / packaging
 .Python
 build/

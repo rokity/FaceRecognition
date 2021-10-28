@@ -1,7 +1,9 @@
 from flask import Flask, render_template,request, Response,jsonify
 import cv2
 from Face import camRun
-
+from inference_i3d import run
+from video_renaming import get_all_video_info
+import os
 
 app = Flask(__name__)
 video_path="./videos/"
@@ -11,24 +13,24 @@ def hello():
   return render_template('home.html')
 
   
-@app.route("/video_feed",methods=["POST"])
+@app.route("/video_feed", methods=["POST"])
 def video_feed():
   uploaded_file = request.files['video']
   if uploaded_file.filename != '':
-        uploaded_file.save(video_path+uploaded_file.filename)
-  vidcap = cv2.VideoCapture(str(video_path+uploaded_file.filename))
-  faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-  faces=None
-  while True:
-    ret, frame = vidcap.read()
-    if ret==True:
-        faces=camRun(frame,faceCascade)
-    else:
-        vidcap.release()
-        cv2.destroyAllWindows()
-        break
+      uploaded_file.save(video_path+uploaded_file.filename)
+  mode = 'rgb'
+  num_classes = 27  # get_all_video_info()
+  save_model = 'checkpoints/'
+  model = 'nslt_27_000128_0.750000.pt'
+
+  num_max_samples = 10
+  root = './videos/'
+  train_split = 'preprocess/nslt_{}.json'.format(get_all_video_info())
+  weights=save_model+model
+  _word=run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights, process_unit='cpu',num_classes=num_classes,split=train_split)
+  os.remove(video_path+uploaded_file.filename)
   
-  return jsonify({"phrase":faces})
+  return jsonify({"phrase":_word})
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0", debug=True)
