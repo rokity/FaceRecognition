@@ -4,6 +4,7 @@ from Face import camRun
 
 
 app = Flask(__name__)
+video_path="./videos/"
 
 @app.route("/")
 def hello():
@@ -14,8 +15,8 @@ def hello():
 def video_feed():
   uploaded_file = request.files['video']
   if uploaded_file.filename != '':
-        uploaded_file.save(uploaded_file.filename)
-  vidcap = cv2.VideoCapture(str(uploaded_file.filename))
+        uploaded_file.save(video_path+uploaded_file.filename)
+  vidcap = cv2.VideoCapture(str(video_path+uploaded_file.filename))
   faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
   faces=None
   while True:
