@@ -1,0 +1,27 @@
+0 excuse
+1 name
+2 my
+3 start
+4 when
+5 two
+6 n
+7 s
+8 i
+9 today
+10 o
+11 stop
+12 bus
+13 m
+14 thirsty
+15 what
+16 me
+17 time
+18 thank you
+19 where
+20 three
+21 hospital
+22 movie
+23 e
+24 hungry
+25 one
+26 rain
